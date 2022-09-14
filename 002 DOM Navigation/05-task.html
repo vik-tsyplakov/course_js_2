@@ -477,13 +477,19 @@
             }
         ];
 
+        let emailAddressesOutput = document.querySelector("#emailAddressesOutput"),
+            greatesFriendsCountOutput = document.querySelector("#greatesFriendsCountOutput"),
+            greatestBalanceCompanyOutput = document.querySelector("#greatestBalanceCompanyOutput"),
+            lowestBalanceCompanyOutput = document.querySelector("#lowestBalanceCompanyOutput");
+
         function showAllEmails() {
-            console.log("Электронные адреса пользователей:")
-            users.forEach(user => console.log(user.email));
+            let output = "";
+            users.forEach(user => output += user.email + "<br />");
+            emailAddressesOutput.innerHTML = output;
         }
 
         function showHigestFriendCount() {
-            console.log("Пользователи с наибольшим количеством друзей");
+            let output = "";
 
             let max = Number.MIN_VALUE;
 
@@ -494,7 +500,9 @@
 
             users
                 .filter(user => user.friends.length == max)
-                .forEach(user => console.log(user.name.first + " " + user.name.last));
+                .forEach(user => output += user.name.first + " " + user.name.last + "<br />");
+
+            greatesFriendsCountOutput.innerHTML = output;
         }
 
         function showMinMaxBalance() {
@@ -510,15 +518,13 @@
                 }
             });
 
-            console.log("Компании пользователей с наибольшим балансом:")
             users
                 .filter(user => user.balance == maxBalance)
-                .forEach(user => console.log(user.company));
+                .forEach(user => greatestBalanceCompanyOutput.textContent = user.company);
 
-            console.log("Компании пользователей с наименьшим балансом:")
             users
                 .filter(user => user.balance == minBalance)
-                .forEach(user => console.log(user.company));
+                .forEach(user => lowestBalanceCompanyOutput.textContent = user.company);
         }
 
         showAllEmails();
