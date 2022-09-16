@@ -24,6 +24,10 @@
         "Friday",
         "Saturday",
       ];
+      let div = document.querySelector("#output");
+      days.forEach((element) => {
+        div.insertAdjacentHTML("beforeend", `<p>${element}`);
+      });
     </script>
   </body>
 </html>
