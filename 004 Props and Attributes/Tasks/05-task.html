@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task 05</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div data-bind="firstName"></div>
     <div data-bind="lastName"></div>
     <div data-bind="age"></div>
 
     <script>
-        /*
+      /*
         Задание:
         Напишите сценарий, который свойства объекта user выведет в элементы на странице, которые помечены атрибутами data-bind.
         При этом значение атрибута это имя свойства, значение которого должно отобразится в элементе.
@@ -23,13 +22,24 @@
         Для обхода свойств объекта, можно использовать цикл for in
         */
 
-        let user = {
-            firstName: "Jhon",
-            lastName: "Doe",
-            age: "25",
+      let user = {
+        firstName: "Jhon",
+        lastName: "Doe",
+        age: "25",
+      };
+
+      function bindProperties(obj) {
+        for (const propName in obj) {
+          // данная проверка нужна для того чтобы игнорировать свойства прототипа (будет рассмотрено в следующих уроках). Без этой проверки код сработает, но ее стоит всегда использовать при работе с for in
+          if (Object.hasOwnProperty.call(obj, propName)) {
+            const value = obj[propName];
+
+            const element = document.querySelector(`[data-bind="${propName}"]`);
+            element.textContent = value;
+          }
         }
-
+      }
+      bindProperties(user);
     </script>
-</body>
-
+  </body>
 </html>
