@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task 05</title>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div id="message"></div>
+    <input id="number" autofocus /> <button id="checkButton">Check</button>
     <script>
-        /*
+      /*
         Задание:
         Напишите сценарии "Игра 'Угадай число'". Суть игры - угадать за меньшее количество попыток число, которое загадал сценарий.
         Каждый раз, когда игрок пытается угадать число, сценарий выводит подсказку - меньшее или большее число было загадано сценарием.
@@ -31,7 +32,45 @@
         Пользователь: 56
         Сценарий: Правильно! Загаданное значение 56. Вы угадали с 4й попытки за 10 сек.
         */
-    </script>
-</body>
 
+      let output = document.querySelector("#message");
+      let input = document.querySelector("#number");
+      document
+        .querySelector("#checkButton")
+        .addEventListener("click", checkValue);
+      document.body.addEventListener("keydown", (e) => {
+        if (e.key == "Enter") checkValue();
+      });
+
+      let max = 100;
+      let timerId = null;
+      let elapsed = 0;
+
+      let randomValue = Math.floor(Math.random() * max + 1);
+      let attempt = 0;
+
+      alert("я загадал случайное значение от 0 до " + max);
+      timerId = setInterval(() => elapsed++, 1000);
+
+      output.innerHTML = "Попробуйте угадать. Введите значение";
+
+      function checkValue() {
+        attempt++;
+        let currentValue = input.value;
+
+        if (currentValue > randomValue) {
+          output.innerHTML = `Я загадал значение меньше чем ${currentValue}`;
+        } else if (currentValue < randomValue) {
+          output.innerHTML = `Я загадал значение больше чем ${currentValue}`;
+        }
+        if (currentValue == randomValue) {
+          clearInterval(timerId);
+          alert(
+            `Правильно! Загаданное значенеи ${randomValue}. Вы угадали с ${attempt}й попытки за ${elapsed} сек.`
+          );
+        }
+        input.value = "";
+      }
+    </script>
+  </body>
 </html>
