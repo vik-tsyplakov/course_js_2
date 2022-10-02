@@ -43,6 +43,33 @@
         2. В момент, когда поле ввода login получает фокус, покажите подсказку, которая находится в span#loginHint
            В момент, когда фокус получает поле ввода password - подсказку span#passwordHint
         */
+
+        const form = document.forms[0];
+
+        form.addEventListener("submit", function (e) {
+            let login = form.login.value;
+            let password = form.password.value;
+            alert(login + " " + password);
+
+            e.preventDefault();
+        });
+
+        form.login.addEventListener("focus", function () {
+            document.querySelector("#loginHint").style.display = "inline";
+        });
+
+        form.login.addEventListener("blur", function () {
+            document.querySelector("#loginHint").style.display = "none";
+        });
+
+        form.password.addEventListener("focus", function () {
+            document.querySelector("#passwordHint").style.display = "inline";
+        });
+
+        form.password.addEventListener("blur", function () {
+            document.querySelector("#passwordHint").style.display = "none";
+        });
+    </script>
     </script>
 </body>
 
